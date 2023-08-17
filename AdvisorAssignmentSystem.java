@@ -15,8 +15,9 @@ public class AdvisorAssignmentSystem {
     }
 
     public void run() {
+        JOptionPane.showMessageDialog(null, "Welcome to the Advisor Assignment System program!!! \nManage advisors and their advisees with this Java GUI program :) \n-Input details for up to 10 advisors, each with their GNumber, first name, last name, and salary.\n-For each advisor, add information for up to 30 advisees including their GNumber, first name, last name, class level, and major.\n-Display a comprehensive report showcasing advisor assignments and their corresponding advisees using a JOptionPane dialog.");
         do{
-            String gNumber = JOptionPane.showInputDialog("Enter advisor GNumber or 'end' to finish):");
+            String gNumber = JOptionPane.showInputDialog("Enter advisor GNumber");
             if (gNumber.equalsIgnoreCase("end")) {
                 break;
             }
@@ -31,7 +32,11 @@ public class AdvisorAssignmentSystem {
             addAdvisees(advisor);
 
             addAdvisor(advisor);
-        }while(advisorCount < 10);
+            String addAnother = JOptionPane.showInputDialog("Do you want to add another advisor? (yes/no):");
+        if (addAnother.equalsIgnoreCase("no")) {
+            break;
+        }
+        }while(advisorCount < 10);  
 
         printReport();
     }
@@ -64,7 +69,9 @@ public class AdvisorAssignmentSystem {
             report.append("Advisor: ").append(advisor.getFirstName()).append(" ").append(advisor.getLastName()).append("\n");
             report.append("Advisees:\n");
             for (V2_Student advisee : advisor.getAdvisees()) {
+               if (advisee != null) {
                 report.append("- ").append(advisee.getFirstName()).append(" ").append(advisee.getLastName()).append(" (").append(advisee.getGNumber()).append(")\n");
+                }
             }
             report.append("\n");
         }
